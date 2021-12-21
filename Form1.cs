@@ -22,13 +22,11 @@ namespace OOP_42
             modelA = new Model();
             modelB = new Model();
             modelC = new Model();
-            modelA.observer += new System.EventHandler(this.UpdateFromModel);
-            modelB.observer += new System.EventHandler(this.UpdateFromModel2);
-            modelC.observer += new System.EventHandler(this.UpdateFromModel3);
+            modelA.observer += new System.EventHandler(this.UpdateModel);
+            modelB.observer += new System.EventHandler(this.UpdateModel);
+            modelC.observer += new System.EventHandler(this.UpdateModel);
             modelC.setValue(100);
         }
-
-
       
         private void num_A_ValueChanged(object sender, EventArgs e)
         {
@@ -45,14 +43,6 @@ namespace OOP_42
         private void track_A_Scroll(object sender, EventArgs e)
         {
             modelA.setValue(track_A.Value);
-        }
-        private void UpdateFromModel(object sender,EventArgs e)
-        {
-            tb_A.Text = modelA.getValue().ToString();
-            num_A.Value = modelA.getValue();
-            track_A.Value = modelA.getValue();
-            modelB.setMin(modelA.getValue());
-
         }
 
         private void num_B_ValueChanged(object sender, EventArgs e)
@@ -73,15 +63,6 @@ namespace OOP_42
         {
             modelB.setValue(track_B.Value);
         }
-        private void UpdateFromModel2(object sender, EventArgs e)
-        {
-            tb_B.Text = modelB.getValue().ToString();
-            num_B.Value = modelB.getValue();
-            track_B.Value = modelB.getValue();
-            modelC.setMin(modelB.getValue());
-            modelA.setMax(modelB.getValue());
-
-        }
 
         private void num_C_ValueChanged(object sender, EventArgs e)
         {
@@ -101,13 +82,26 @@ namespace OOP_42
         {
             modelC.setValue(track_C.Value);
         }
-        private void UpdateFromModel3(object sender, EventArgs e)
+
+        private void UpdateModel(object sender, EventArgs e)
         {
+            tb_A.Text = modelA.getValue().ToString();
+            num_A.Value = modelA.getValue();
+            track_A.Value = modelA.getValue();
+            modelB.setMin(modelA.getValue());
+
+
+            tb_B.Text = modelB.getValue().ToString();
+            num_B.Value = modelB.getValue();
+            track_B.Value = modelB.getValue();
+            modelC.setMin(modelB.getValue());
+            modelA.setMax(modelB.getValue());
+
+
             tb_C.Text = modelC.getValue().ToString();
             num_C.Value = modelC.getValue();
-            track_C.Value = modelC.getValue();            
-            modelB.setMax(modelC.getValue());            
-
+            track_C.Value = modelC.getValue();
+            modelB.setMax(modelC.getValue());
         }
     }
 }
